@@ -289,7 +289,7 @@
             document.getElementById('artifact-select').addEventListener('change', function() {
                 const selectedArtifacts = this.value;
                 if (selectedArtifacts) {
-                    fetch('get_artifacts.php')
+                    fetch('https://accs.kr/genshin_artifacts_checker/get_artifacts.php')
                         .then(response => response.json())
                         .then(data => {
                             const artifact = data.find(item => item.name == selectedArtifacts);
