@@ -8,6 +8,9 @@
 </head>
 <body>
     <script>
+        const url = new URL(window.location.href);
+        const params = new URLSearchParams(url.search);
+        
         fetch('data/artifacts.csv')
         .then(response => response.text())
         .then(csvText => {
@@ -15,7 +18,7 @@
                 header: true,
                 complete: function(results) {
                     const data = results.data;
-                    const targetRow = data.find(row => row.name === "번개 같은 분노");
+                    const targetRow = data.find(row => row.name === params.get('name'));
                     if (targetRow) {
                         document.write(JSON.stringify(targetRow, null, 2));
                     } else {
