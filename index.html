@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>원신 성유물 누가쓰지?</title>
     <meta name="description" content="성유물을 누가 쓰는지 궁금해서 갈아야하나 보관해야하나 망설였다면 누가 쓸수있는지 알려드립니다">
-    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/png" href="https://accs.kr/genshin_artifacts_checker/favicon.png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <style>
@@ -222,7 +222,7 @@
         <div class="mt-5 text-secondary" style="font-size:14px">
         <p>사이트 정보</p>
         성유물을 누가 쓰는지 궁금해서 갈아야하나 보관해야하나 망설이셨나요? 가지고있는 성유물 정보를 입력하면 누가 쓸수있는지 알려드립니다.<br>다만 최신 캐릭터, 최신 성유물, 최신 빌드는 아직 업데이트가 안됬을 수 있습니다. 또한 비주류 빌드는 알려드리지 않습니다.<br>
-        해외서버를 사용중인데 한국DNS에서 간혈적으로 접속이 안되는 문제가 발생됩니다. 보조DNS를 1.1.1.1로 설정하면 해결됩니다.
+        해외서버를 사용중인데 한국DNS에서 간혈적으로 통신이 안되는 문제가 발생됩니다. 보조DNS를 1.1.1.1로 설정하면 해결됩니다.
         <p>정보 업데이트 2025/02/08</p>
         <a href="#"><p id="dark-mode-toggle">[다크모드 사용]</p></a>
         </div>
@@ -251,7 +251,7 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             
-            fetch('get_artifacts.php')
+            fetch('https://accs.kr/genshin_artifacts_checker/get_artifacts.php')
                 .then(response => response.json())
                 .then(data => {
                     const artifactSelect = document.getElementById('artifact-select');
@@ -410,7 +410,7 @@
                 formData.append('subOptions', selected_subOptions.join(','));
 
                 try {
-                    fetch('howto.php', {
+                    fetch('https://accs.kr/genshin_artifacts_checker/howto.php', {
                         method: 'POST',
                         body: formData
                     })
@@ -450,7 +450,7 @@
                     });
                 } catch {
                     if(confirm("로봇인지 사람인지 확인해주세요.")) {
-                        window.open('robot_check.htm', 'robotCheckWindow', 'width=300,height=200');
+                        window.open('https://accs.kr/genshin_artifacts_checker/robot_check.htm', 'robotCheckWindow', 'width=300,height=200');
                     }
                 }
             });
