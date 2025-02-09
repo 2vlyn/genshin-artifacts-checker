@@ -409,7 +409,7 @@
                 formData.append('mainOption', selected_mainOption);
                 formData.append('subOptions', selected_subOptions.join(','));
 
-                try {
+                
                     fetch('https://accs.kr/genshin_artifacts_checker/howto.php', {
                         method: 'POST',
                         body: formData
@@ -447,12 +447,11 @@
                             `;
                             document.getElementById("who-is-use-this").innerHTML = whoisusethis;
                         }
+                    }).catch(ex => {
+                        if(confirm("로봇인지 사람인지 확인해주세요.")) {
+                            window.open('https://accs.kr/genshin_artifacts_checker/robot_check.htm', 'robotCheckWindow', 'width=300,height=200');
+                        }
                     });
-                } catch {
-                    if(confirm("로봇인지 사람인지 확인해주세요.")) {
-                        window.open('https://accs.kr/genshin_artifacts_checker/robot_check.htm', 'robotCheckWindow', 'width=300,height=200');
-                    }
-                }
             });
 
             document.getElementById('dark-mode-toggle').addEventListener('click', function() {
