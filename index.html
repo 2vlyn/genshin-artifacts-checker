@@ -8,6 +8,7 @@
     <link rel="icon" type="image/png" href="https://accs.kr/genshin_artifacts_checker/favicon.png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script src="artifacts.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -289,28 +290,24 @@
             document.getElementById('artifact-select').addEventListener('change', function() {
                 const selectedArtifacts = this.value;
                 if (selectedArtifacts) {
-                    fetch('get_artifacts.html')
-                        .then(response => response.json())
-                        .then(data => {
-                            const artifact = data.find(item => item.name == selectedArtifacts);
-                            selectedArtifactsParts = {flower: artifact.flower, feather: artifact.feather, sand: artifact.sand, goblet: artifact.goblet, circlet: artifact.circlet};
-                            if (artifact) {
-                                document.getElementById('artifacts-name').innerHTML = `
-                                    ${artifact.name}
-                                `;
-                                if(selectedArtifactsPart) document.getElementById('artifact-name').innerHTML = `${selectedArtifactsParts[selectedArtifactsPart]}`;
-                                document.getElementById('artifacts-2set').innerHTML = `
-                                    <p>2세트: ${artifact.set2}</p>
-                                `;
-                                document.getElementById('artifacts-4set').innerHTML = `
-                                    <p>4세트: ${artifact.set4}</p>
-                                `;
-                                document.getElementById('part-select').querySelectorAll('input').forEach(input => {
-                                    input.disabled = false;
-                                });
-                            }
+                    var artifacts = get_artifactsInfo(selectedArtifacts);
+                    selectedArtifactsParts = {flower: artifacts.flower, feather: artifacts.feather, sand: artifacts.sand, goblet: artifacts.goblet, circlet: artifacts.circlet};
+                    if (artifacts) {
+                        document.getElementById('artifacts-name').innerHTML = `
+                            ${artifacts.name}
+                        `;
+                        if(selectedArtifactsPart) document.getElementById('artifact-name').innerHTML = `${selectedArtifactsParts[selectedArtifactsPart]}`;
+                        document.getElementById('artifacts-2set').innerHTML = `
+                            <p>2세트: ${artifacts.set2}</p>
+                        `;
+                        document.getElementById('artifacts-4set').innerHTML = `
+                            <p>4세트: ${artifacts.set4}</p>
+                        `;
+                        document.getElementById('part-select').querySelectorAll('input').forEach(input => {
+                            input.disabled = false;
                         });
-                        if(selectedArtifactsPart) document.getElementById('submit-button').disabled = false;
+                    }
+                    if(selectedArtifactsPart) document.getElementById('submit-button').disabled = false;
                 } else {
                     document.getElementById('artifacts-info').innerHTML = '';
                     document.getElementById('part-select').querySelectorAll('input').forEach(input => {
