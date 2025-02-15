@@ -30,7 +30,7 @@ function get_artifactsInfo(artifactsName) {
                     const data = results.data;
                     const targetRow = data.find(row => row.name === artifactsName);
                     if (targetRow) {
-                        return JSON.stringify(targetRow, null, 2);
+                        return targetRow;
                     } else {
                         console.log('해당 성유물을 찾을 수 없습니다.');
                         return null;
