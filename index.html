@@ -290,7 +290,7 @@
                 }
             }
 
-            document.getElementById('artifact-select').addEventListener('change', function() {
+            document.getElementById('artifact-select').addEventListener('change', async function() {
                 const selectedArtifacts = this.value;
                 if (selectedArtifacts) {
                     try {
