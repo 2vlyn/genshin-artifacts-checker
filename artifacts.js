@@ -20,7 +20,7 @@ async function get_artifactsList() {
 }
 
 
-function get_artifactsInfo(name) {
+function get_artifactsInfo(artifactsName) {
     fetch('data/artifacts.csv')
         .then(response => response.text())
         .then(csvText => {
@@ -28,7 +28,7 @@ function get_artifactsInfo(name) {
                 header: true,
                 complete: function(results) {
                     const data = results.data;
-                    const targetRow = data.find(row => row.name === params.get('name'));
+                    const targetRow = data.find(row => row.name === artifactsName);
                     if (targetRow) {
                         document.write(JSON.stringify(targetRow, null, 2));
                     } else {
