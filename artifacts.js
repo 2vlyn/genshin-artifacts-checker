@@ -10,12 +10,14 @@ function get_artifactsList() {
                         return JSON.stringify(data, null, 2);
                     } else {
                         console.log('데이터가 없습니다.');
+                        return null;
                     }
                 }
             });
         })
         .catch(error => {
             console.error('CSV 파일을 읽는 중 오류 발생:', error);
+            return null;
         });
 }
 
