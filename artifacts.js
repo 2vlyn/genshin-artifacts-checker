@@ -1,24 +1,22 @@
-function get_artifactsList() {
-    fetch('data/artifacts.csv')
-        .then(response => response.text())
-        .then(csvText => {
+async function get_artifactsList() {
+    try {
+        const response = await fetch('data/artifacts.csv');
+        const csvText = await response.text();
+        return new Promise((resolve, reject) => {
             Papa.parse(csvText, {
                 header: true,
                 complete: function(results) {
-                    const data = results.data;
-                    if (data.length > 0) {
-                        return JSON.stringify(data, null, 2);
-                    } else {
-                        console.log('데이터가 없습니다.');
-                        return null;
-                    }
+                    resolve(results.data);
+                },
+                error: function(error) {
+                    reject(error);
                 }
             });
-        })
-        .catch(error => {
-            console.error('CSV 파일을 읽는 중 오류 발생:', error);
-            return null;
         });
+    } catch (error) {
+        console.error('CSV 파일을 읽는 중 오류 발생:', error);
+        return [];
+    }
 }
 
 
