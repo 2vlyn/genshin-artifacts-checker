@@ -295,7 +295,9 @@
                 if (selectedArtifacts) {
                     try {
                         var artifacts = await get_artifactsInfo(selectedArtifacts);
-                        selectedArtifactsParts = {flower: artifacts['flower'], feather: artifacts['feather'], sand: artifacts['sand'], goblet: artifacts['goblet'], circlet: artifacts['circlet']};
+                        console.log(artifacts);
+                        console.log(JSON.stringify(artifacts));
+                        selectedArtifactsParts = {flower: artifacts.flower, feather: artifacts.feather, sand: artifacts.sand, goblet: artifacts.goblet, circlet: artifacts.circlet};
                         if (artifacts) {
                             document.getElementById('artifacts-name').innerHTML = `
                                 ${artifacts.name}
