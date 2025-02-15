@@ -251,41 +251,39 @@
         const subOptions = ['치명타 확률', '치명타 피해', '공격력%', '원소 마스터리', 'HP%', '원소 충전 효율', '방어력%', '공격력', 'HP', '방어력'];
 
         document.addEventListener('DOMContentLoaded', function() {
-            
-            fetch('get_artifacts.html')
-                .then(response => response.json())
-                .then(data => {
-                    const artifactSelect = document.getElementById('artifact-select');
-                    data.forEach(artifact => {
-                        const option = document.createElement('option');
-                        option.value = artifact.name;
-                        option.textContent = artifact.name;
-                        artifactSelect.appendChild(option);
-                    });
 
-                    
-                    //자동선택 url parsing
-                    let url = new URL(window.location.href);
-                    let params = new URLSearchParams(url.search);
-
-                    const partsReMapping = {
-                        '생명의 꽃': 'flower',
-                        '죽음의 깃털': 'feather',
-                        '시간의 모래': 'sand',
-                        '공간의 성배': 'goblet',
-                        '이성의 왕관': 'circlet' };
-                    
-                    if(params.get('select_artifacts') != null) {document.getElementById("artifact-select").value = params.get('select_artifacts'); document.getElementById("artifact-select").dispatchEvent(new Event('change'));
-                    if(params.get('select_parts') != null) {document.querySelectorAll('input[name="artifact-part"]').forEach(radio => { if(radio.value === partsReMapping[params.get('select_parts')]) {radio.checked = true; radio.dispatchEvent(new Event('change'));} });}
-                    if(params.get('select_main') != null) {document.getElementById("main-option-select").value = params.get('select_main'); document.getElementById("main-option-select").dispatchEvent(new Event('change'));}
-                    if(params.get('select_sub1') != null) {document.getElementById("sub-option-select-1").value = params.get('select_sub1'); document.getElementById("sub-option-select-1").dispatchEvent(new Event('change'));}
-                    if(params.get('select_sub2') != null) {document.getElementById("sub-option-select-2").value = params.get('select_sub2'); document.getElementById("sub-option-select-2").dispatchEvent(new Event('change'));}
-                    if(params.get('select_sub3') != null) {document.getElementById("sub-option-select-3").value = params.get('select_sub3'); document.getElementById("sub-option-select-3").dispatchEvent(new Event('change'));}
-                    if(params.get('select_sub4') != null) {document.getElementById("sub-option-select-4").value = params.get('select_sub4'); document.getElementById("sub-option-select-4").dispatchEvent(new Event('change'));}
-                    document.getElementById('submit-button').click();
-                    }
-
+            {
+                const artifactSelect = document.getElementById('artifact-select');
+                var artifactsList = get_artifactsList();
+                artifactsList.forEach(artifacts => {
+                    const option = document.createElement('option');
+                    option.value = artifacts.name;
+                    option.textContent = artifacts.name;
+                    artifactSelect.appendChild(option);
                 });
+    
+                
+                //자동선택 url parsing
+                let url = new URL(window.location.href);
+                let params = new URLSearchParams(url.search);
+    
+                const partsReMapping = {
+                    '생명의 꽃': 'flower',
+                    '죽음의 깃털': 'feather',
+                    '시간의 모래': 'sand',
+                    '공간의 성배': 'goblet',
+                    '이성의 왕관': 'circlet' };
+                
+                if(params.get('select_artifacts') != null) {document.getElementById("artifact-select").value = params.get('select_artifacts'); document.getElementById("artifact-select").dispatchEvent(new Event('change'));
+                if(params.get('select_parts') != null) {document.querySelectorAll('input[name="artifact-part"]').forEach(radio => { if(radio.value === partsReMapping[params.get('select_parts')]) {radio.checked = true; radio.dispatchEvent(new Event('change'));} });}
+                if(params.get('select_main') != null) {document.getElementById("main-option-select").value = params.get('select_main'); document.getElementById("main-option-select").dispatchEvent(new Event('change'));}
+                if(params.get('select_sub1') != null) {document.getElementById("sub-option-select-1").value = params.get('select_sub1'); document.getElementById("sub-option-select-1").dispatchEvent(new Event('change'));}
+                if(params.get('select_sub2') != null) {document.getElementById("sub-option-select-2").value = params.get('select_sub2'); document.getElementById("sub-option-select-2").dispatchEvent(new Event('change'));}
+                if(params.get('select_sub3') != null) {document.getElementById("sub-option-select-3").value = params.get('select_sub3'); document.getElementById("sub-option-select-3").dispatchEvent(new Event('change'));}
+                if(params.get('select_sub4') != null) {document.getElementById("sub-option-select-4").value = params.get('select_sub4'); document.getElementById("sub-option-select-4").dispatchEvent(new Event('change'));}
+                document.getElementById('submit-button').click();
+                }
+            }
 
             document.getElementById('artifact-select').addEventListener('change', function() {
                 const selectedArtifacts = this.value;
