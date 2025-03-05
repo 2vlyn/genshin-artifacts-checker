@@ -253,22 +253,6 @@
 
         document.addEventListener('DOMContentLoaded', async function() {
 
-            {
-                const artifactSelect = document.getElementById('artifact-select');
-                try {
-                    const artifactsList = await get_artifactsList();
-                    artifactsList.forEach(artifact => {
-                        const option = document.createElement('option');
-                        option.value = artifact.name;
-                        option.textContent = artifact.name;
-                        artifactSelect.appendChild(option);
-                    });
-                } catch (error) {
-                    console.error('성유물 리스트를 로드하는 중 오류 발생:', error);
-                }
-    
-                
-            }
 
             document.getElementById('artifact-select').addEventListener('change', async function() {
                 const selectedArtifacts = this.value;
@@ -489,6 +473,20 @@
 
 
             {
+
+                const artifactSelect = document.getElementById('artifact-select');
+                try {
+                    const artifactsList = await get_artifactsList();
+                    artifactsList.forEach(artifact => {
+                        const option = document.createElement('option');
+                        option.value = artifact.name;
+                        option.textContent = artifact.name;
+                        artifactSelect.appendChild(option);
+                    });
+                } catch (error) {
+                    console.error('성유물 리스트를 로드하는 중 오류 발생:', error);
+                }
+
                 
                 //자동선택 url parsing
                 let url = new URL(window.location.href);
